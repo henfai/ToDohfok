@@ -6,11 +6,40 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ca.ualbertahf.todohfok.MainActivity" >
+    tools:context="com.ca.ualberta.todohfok.MainActivity" >
 
-    <TextView
+    <EditText
+        android:id="@+id/eventText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/addButton"
+        android:ems="10"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+
+    <ListView
+        android:id="@+id/eventList"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:layout_above="@+id/eventText"
+        android:layout_alignLeft="@+id/eventText"
+        android:layout_alignParentTop="true" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/eventText"
+        android:background = "@null"
+        android:onClick="addEvent"
+        android:text="Add" />
 
 </RelativeLayout>
