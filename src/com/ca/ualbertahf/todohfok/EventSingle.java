@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class EventSingle {
-	private static EventList todolist = null;
+	private static EventList eventList = null;
 	///private static EventList emaillist = null;
 	
 	static public EventList getEventList(){
-		if (todolist == null){
+		if (eventList == null){
 			try{
-				todolist = EveIO.getIO().loadEvents();
-				todolist.addListener(new Listener(){
+				eventList = EveIO.getIO().loadEvents();
+				eventList.addListener(new Listener(){
 					@Override
 					public void update() {
 						saveEvent();
@@ -27,7 +27,7 @@ public class EventSingle {
 				throw new RuntimeException("Could not deserialize StudentList from StudentListManager");
 			}
 		}
-		return todolist;
+		return eventList;
 	}
 	
 	static public void saveEvent(){

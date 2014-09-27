@@ -13,16 +13,17 @@ import android.content.SharedPreferences.Editor;
 import android.util.Base64;
 
 public class EveIO {
+	
 	Context context;
-	static final String tdfile = "EventList";
-	static final String tdkey = "eventList";
+	static final String evPref = "EventList";
+	static final String evKey = "eventList";
 	static private EveIO eveIO = null;
 	
 	public EveIO(Context context) {
 		this.context = context;
 	}
 
-	public static void init(Context context){
+	public static void inititalise(Context context){
 		if(eveIO== null){
 			if (context== null){
 				throw new RuntimeException("Missing Context");
@@ -32,8 +33,8 @@ public class EveIO {
 	}
 	
 	public EventList loadEvents() throws StreamCorruptedException, IOException, ClassNotFoundException{
-		SharedPreferences settings = context.getSharedPreferences(tdfile, Context.MODE_PRIVATE);
-		String data = settings.getString(tdkey, "");
+		SharedPreferences settings = context.getSharedPreferences(evPref, Context.MODE_PRIVATE);
+		String data = settings.getString(evKey, "");
 		if(data.equals("")){
 			return new EventList();
 		}else{
@@ -43,9 +44,9 @@ public class EveIO {
 	}
 	
 	public void saveEvents(EventList tdl) throws IOException{
-		SharedPreferences settings = context.getSharedPreferences(tdfile, Context.MODE_PRIVATE);
+		SharedPreferences settings = context.getSharedPreferences(evPref, Context.MODE_PRIVATE);
 		Editor edit = settings.edit();
-		edit.putString(tdkey, eventToString(tdl));
+		edit.putString(evKey, eventToString(tdl));
 		edit.commit();
 		
 	}
