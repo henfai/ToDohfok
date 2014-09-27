@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class ArchiveSingle {
 	private static ArchiveList arcList = null;
-	///private static EventList emaillist = null;
+
 	
 	static public ArchiveList getArchive(){
 		if (arcList == null){

@@ -71,6 +71,20 @@ public class ArchiveList implements Serializable {
 		
 	}
 	
+	public String eventArcCount(){
+		int arcTotalCount = 0;
+		int arcCheckedCount = 0;
+		for (Event aEvent : arcList) {
+			if (aEvent.getEventText().contains("\u2573")){
+				arcCheckedCount++;
+			}
+			arcTotalCount++;
+		}
+		String arcMix = arcTotalCount + " " + arcCheckedCount;
+		return arcMix;
+		
+	}
+	
 	public void addListener(Listener l){
 		getListeners().add(l);
 	}

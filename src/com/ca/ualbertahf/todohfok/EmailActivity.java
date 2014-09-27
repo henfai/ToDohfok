@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Toast;
 
 public class EmailActivity extends Activity {
 	
@@ -49,7 +51,7 @@ public class EmailActivity extends Activity {
 			public boolean onItemLongClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
 				AlertDialog.Builder ad = new AlertDialog.Builder(EmailActivity.this);
-				ad.setMessage("Delete "+ emaillist.get(position).toString()+"?");
+				ad.setMessage("Choose an action for"+ emaillist.get(position).toString());
 				ad.setCancelable(true);
 				final int finalPosition = position;
 				ad.setPositiveButton("Delete", new OnClickListener(){
@@ -70,11 +72,26 @@ public class EmailActivity extends Activity {
 					});
 					
 				ad.show();
-				return false;
+				return true;
 			}
 			
 		});
 	}
+	
+	public void sending(View v){
+		Intent send = new Intent(Intent.ACTION_SEND);
+		send.setType("message/rfc822");
+		///send.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});	
+		send.putExtra(Intent.EXTRA_SUBJECT, "My Todo List");
+		send.putExtra(Intent.EXTRA_TEXT   , "ToDo: \n_______\n");
+		try {
+		    startActivity(Intent.createChooser(send, "Send mail..."));
+		    Toast.makeText(EmailActivity.this, "This feature is coming soon!!!", Toast.LENGTH_LONG).show();
+		} catch (android.content.ActivityNotFoundException ex) {
+		    Toast.makeText(EmailActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

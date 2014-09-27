@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
@@ -62,10 +64,10 @@ public class ArchiveActivity extends Activity {
 			public boolean onItemLongClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
 				AlertDialog.Builder ad = new AlertDialog.Builder(ArchiveActivity.this);
-				ad.setMessage("Delete "+ archivelist.get(position).toString()+"?");
+				ad.setMessage("Choose an action for"+ archivelist.get(position).toString());
 				ad.setCancelable(true);
 				final int finalPosition = position;
-				ad.setPositiveButton("Delete", new OnClickListener(){
+				ad.setNegativeButton("Delete", new OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Event arcEve = archivelist.get(finalPosition);
@@ -75,7 +77,7 @@ public class ArchiveActivity extends Activity {
 					
 				});
 				//Crashing for some reason :(
-				ad.setNeutralButton("UnArchive", new OnClickListener(){
+				ad.setNeutralButton("Unarchive", new OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Event arcEve = archivelist.get(finalPosition);
@@ -86,22 +88,88 @@ public class ArchiveActivity extends Activity {
 					}
 					
 				});
-				ad.setNegativeButton("AddToEmail", new OnClickListener(){
+				ad.setNegativeButton("Add To pending Email", new OnClickListener(){
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Event todo = archivelist.get(finalPosition);
-						//emails.addTodo(todo);
-						//TodoSingle.getEmails().addTodo(todo);
+						Event email = archivelist.get(finalPosition);
+						EmailSingle.getEmail().addEvent(email);
 					}
 					});
 					
 				ad.show();
-				return false;
+				return true;
 			}
 			
 		});
 	}
+	
+	public void Email(MenuItem menu) {
+		AlertDialog.Builder abc = new AlertDialog.Builder(ArchiveActivity.this);
+		abc.setMessage("Choose an action");
+		abc.setCancelable(true);
+		abc.setNegativeButton("Email All Active", new OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent send = new Intent(Intent.ACTION_SEND);
+				send.setType("message/rfc822");
+				///send.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});	
+				send.putExtra(Intent.EXTRA_SUBJECT, "My Todo List");
+				send.putExtra(Intent.EXTRA_TEXT   , "Todo List:\n_________\n\n");
+				try {
+				    startActivity(Intent.createChooser(send, "Send mail..."));
+				    Toast.makeText(ArchiveActivity.this, "This feature is coming soon!!!", Toast.LENGTH_LONG).show();
+				} catch (android.content.ActivityNotFoundException ex) {
+				    Toast.makeText(ArchiveActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+				}
+															
+			}										
+		});
+		abc.setPositiveButton("Email All Checked", new OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent send = new Intent(Intent.ACTION_SEND);
+				send.setType("message/rfc822");
+				send.putExtra(Intent.EXTRA_SUBJECT, "My Todo List");
+				send.putExtra(Intent.EXTRA_TEXT   , "Todo List:\n_________\n\n");
+				try {
+				    startActivity(Intent.createChooser(send, "Send mail..."));
+				    Toast.makeText(ArchiveActivity.this, "This feature is coming soon!!!", Toast.LENGTH_LONG).show();
+				} catch (android.content.ActivityNotFoundException ex) {
+				    Toast.makeText(ArchiveActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+				}
+				
+			}										
+		});
+		
+		abc.setNeutralButton("Email All Unchecked", new OnClickListener() {		
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent send = new Intent(Intent.ACTION_SEND);
+				send.setType("message/rfc822");
+				///send.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});	
+				send.putExtra(Intent.EXTRA_SUBJECT, "My Todo List");
+				send.putExtra(Intent.EXTRA_TEXT   , "Todo List:\n_________\n\n");
+				try {
+				    startActivity(Intent.createChooser(send, "Send mail..."));
+				    Toast.makeText(ArchiveActivity.this, "This feature is coming soon!!!", Toast.LENGTH_LONG).show();
+				} catch (android.content.ActivityNotFoundException ex) {
+				    Toast.makeText(ArchiveActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+				}
+				
+			}
+		});
+		abc.show();
+		return;
+
+	}
+	
+	public void pending(MenuItem menu) {
+		Toast.makeText(this, "Accessing pending emails", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(ArchiveActivity.this, EmailActivity.class);
+		startActivity(intent);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

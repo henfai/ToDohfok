@@ -77,7 +77,44 @@ public class EventList implements Serializable {
 		getListeners().remove(l);
 	}
 	
-
+	
+	
+	public static String combineEmailChecked(ArrayList<Event> temp){
+		String comboString = "";
+		for (Event eEvent : temp) {
+			if (eEvent.getEventText().contains("\u2573")){
+				comboString = comboString + eEvent.getEventText() + "\n";
+			}
+		}	
+		return comboString;
+	}
+	
+	public static String combineEmailUnchecked(ArrayList<Event> temp){
+		String comboString = "";
+		for (Event eEvent : temp) {
+		if (eEvent.getEventText().contains("\u2573") == false){
+			comboString = comboString + eEvent.getEventText() + "\n";
+			}
+		}
+		
+		return comboString;
+	}
+	
+	public String eventActCount(){
+		int activeTotalCount = 0;
+		int activeCheckedCount = 0;
+		for (Event cEvent : eventList) {
+			if (cEvent.toString().contains("\u2573")){
+				activeCheckedCount++;
+			}
+			activeTotalCount++;
+		}
+		
+		String combActive = String.valueOf(activeCheckedCount) + " " + String.valueOf(activeTotalCount);
+		return combActive;
+		
+	}
+	
 	public void clear(){
 		eventList = new ArrayList<Event>();
 		notifyListen();

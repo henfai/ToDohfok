@@ -7,5 +7,7 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    <item android:id="@+id/email" android:title="Email..." android:onClick="Email" android:showAsAction="never"></item>
+    <item android:id="@+id/pending" android:title="Pending Emails" android:onClick="pending" android:showAsAction="never"></item>
 
 </menu>

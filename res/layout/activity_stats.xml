@@ -25,18 +25,30 @@
         android:id="@+id/arcUncheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/actTolText"
-        android:layout_alignTop="@+id/arcTotalText"
+        android:layout_alignLeft="@+id/arcCheck1"
+        android:layout_below="@+id/arcTotalText"
+        android:layout_marginTop="26dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/gTotalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/view1"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="30dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/arcCheck1"
+        android:id="@+id/arcTotalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/arcUncheck"
-        android:layout_alignLeft="@+id/arcUncheck"
+        android:layout_alignLeft="@+id/gTotalText"
+        android:layout_below="@+id/arcCheck1"
+        android:layout_marginTop="26dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -44,8 +56,9 @@
         android:id="@+id/actCheckText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/actTolText"
-        android:layout_alignLeft="@+id/titleStats"
+        android:layout_alignLeft="@+id/arcTotalText"
+        android:layout_below="@+id/arcUncheck"
+        android:layout_marginTop="20dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -53,9 +66,9 @@
         android:id="@+id/actUncheckText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/actCheckText"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="74dp"
-        android:layout_toLeftOf="@+id/actTolText"
+        android:layout_marginBottom="34dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -64,27 +77,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/actUncheckText"
-        android:layout_toRightOf="@+id/actCheckText"
+        android:layout_alignLeft="@+id/arcUncheck"
+        android:layout_marginBottom="22dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/gTotalText"
+        android:id="@+id/arcCheck1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/arcTotalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/actCheckText"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/gTotalText"
-        android:layout_marginTop="80dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="26dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

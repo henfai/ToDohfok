@@ -8,5 +8,8 @@
         android:showAsAction="never"
         android:title="@string/action_settings"/>
     <item android:id="@+id/archive" android:onClick="archive" android:showAsAction="never" android:title="Archive"></item>
+    <item android:id="@+id/stat" android:onClick="stats" android:showAsAction="never" android:title="Stats"></item>
+    <item android:id="@+id/email" android:onClick="Email" android:showAsAction="never" android:title="Email..."></item>
+    <item android:id="@+id/pending" android:onClick="pending" android:showAsAction="never" android:title="Pending Emails"></item>
 
 </menu>

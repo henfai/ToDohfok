@@ -33,13 +33,16 @@ public final class R {
         public static final int arcCheck1=0x7f08000b;
         public static final int arcTotalText=0x7f08000a;
         public static final int arcUncheck=0x7f080008;
-        public static final int archive=0x7f080010;
+        public static final int archive=0x7f080012;
         public static final int archiveList=0x7f080000;
-        public static final int button1=0x7f080002;
+        public static final int email=0x7f080010;
         public static final int eventList=0x7f080005;
         public static final int eventText=0x7f080003;
         public static final int gTotalText=0x7f08000e;
+        public static final int pending=0x7f080011;
         public static final int pendingEmail=0x7f080001;
+        public static final int sender=0x7f080002;
+        public static final int stat=0x7f080013;
         public static final int titleStats=0x7f080006;
         public static final int view1=0x7f080007;
     }
