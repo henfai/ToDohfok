@@ -12,53 +12,53 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Base64;
 
-public class EveIO {
+public class EmIO {
 	
 	Context context;
-	static final String evPref = "EventList";
-	static final String evKey = "eventList";
-	static private EveIO eveIO = null;
+	static final String emPref = "EmailList";
+	static final String emKey = "emailList";
+	static private EmIO emIO = null;
 	
-	public EveIO(Context context) {
+	public EmIO(Context context) {
 		this.context = context;
 	}
 
 	public static void inititalise(Context context){
-		if(eveIO== null){
+		if(emIO== null){
 			if (context== null){
 				throw new RuntimeException("Missing Context");
 			}
-			eveIO = new EveIO(context);
+			emIO = new EmIO(context);
 		}
 	}
 	
-	public EventList loadEvents() throws StreamCorruptedException, IOException, ClassNotFoundException{
-		SharedPreferences settings = context.getSharedPreferences(evPref, Context.MODE_PRIVATE);
-		String data = settings.getString(evKey, "");
+	public EmailList loadEmails() throws StreamCorruptedException, IOException, ClassNotFoundException{
+		SharedPreferences settings = context.getSharedPreferences(emPref, Context.MODE_PRIVATE);
+		String data = settings.getString(emKey, "");
 		if(data.equals("")){
-			return new EventList();
+			return new EmailList();
 		}else{
 			return eventFromString(data);
 		}
 		
 	}
 	
-	private EventList eventFromString(String storeData) throws StreamCorruptedException, IOException, ClassNotFoundException {
-		ByteArrayInputStream bytin = new ByteArrayInputStream(Base64.decode(storeData, Base64.DEFAULT));
+	private EmailList eventFromString(String data) throws StreamCorruptedException, IOException, ClassNotFoundException {
+		ByteArrayInputStream bytin = new ByteArrayInputStream(Base64.decode(data, Base64.DEFAULT));
 		ObjectInputStream objIn = new ObjectInputStream(bytin);
-		return (EventList) objIn.readObject();
+		return (EmailList) objIn.readObject();
 	}
 
 	
-	public void saveEvents(EventList str) throws IOException{
-		SharedPreferences settings = context.getSharedPreferences(evPref, Context.MODE_PRIVATE);
+	public void saveEmails(EmailList str) throws IOException{
+		SharedPreferences settings = context.getSharedPreferences(emPref, Context.MODE_PRIVATE);
 		Editor edit = settings.edit();
-		edit.putString(evKey, eventToString(str));
+		edit.putString(emKey, eventToString(str));
 		edit.commit();
 		
 	}
 	
-	private String eventToString(EventList str) throws IOException {
+	private String eventToString(EmailList str) throws IOException {
 		ByteArrayOutputStream bytout = new ByteArrayOutputStream();
 		ObjectOutputStream objout = new ObjectOutputStream(bytout);
 		objout.writeObject(str);
@@ -70,11 +70,11 @@ public class EveIO {
 	}
 
 	
-	public static EveIO getIO() {
-		if (eveIO == null){
+	public static EmIO getIO() {
+		if (emIO == null){
 			throw new RuntimeException("NotInit");
 		}
-		return eveIO;
+		return emIO;
 		}
 	}
 

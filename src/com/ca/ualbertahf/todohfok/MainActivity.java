@@ -35,9 +35,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		EveIO.inititalise(this.getApplicationContext());
-		//ArcIO.init(this.getApplicationContext());
-
-
+		ArcIO.inititalise(this.getApplicationContext());
+		EmIO.inititalise(this.getApplicationContext());
 		ListView listview =  (ListView) findViewById(R.id.eventList);
 		Collection<Event> Events = EventSingle.getEventList().getEvent();
 		final ArrayList<Event> Eventslist = new ArrayList<Event>(Events);
@@ -64,10 +63,10 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> adapterView, View view, int position,
 					long id) {
 				final int finalPosition = position;
-				Event Event = Eventslist.get(finalPosition);
-				///EventSingle.getEventList().check(Event);
-				
-			}
+				Event event = Eventslist.get(finalPosition);
+				EventSingle.getEventList().check(event);
+				}
+
 			
 		});
 		
@@ -95,7 +94,7 @@ public class MainActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						Event Event = Eventslist.get(finalPosition);
 						EventSingle.getEventList().deleteEvent(Event);
-						///ArchiveSingle.getArchive().addEvent(Event);
+						ArchiveSingle.getArchive().addEvent(Event);
 					
 						
 					}
@@ -127,8 +126,8 @@ public class MainActivity extends Activity {
 
 	public void archive(MenuItem menu) {
 		Toast.makeText(this, "Archive", Toast.LENGTH_SHORT).show();
-		////Intent intent = new Intent(MainActivity.this, ArchiveActivity.class);
-		////startActivity(intent);
+		Intent intent = new Intent(MainActivity.this, ArchiveActivity.class);
+		startActivity(intent);
 	}
 
 	public void summarize(MenuItem menu) {

@@ -17,82 +17,55 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-public class ArchiveActivity extends Activity {
+public class EmailActivity extends Activity {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_archive);
-		ArcIO.inititalise(this.getApplicationContext());
-		ListView listview =  (ListView) findViewById(R.id.archiveList);
-		Collection<Event> events = ArchiveSingle.getArchive().getEvent();
-		final ArrayList<Event> archivelist = new ArrayList<Event>(events);
-		final ArrayAdapter<Event> archiveAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1,archivelist);
-		listview.setAdapter(archiveAdapter);
+		setContentView(R.layout.activity_email);
+		EmIO.inititalise(this.getApplicationContext());
+		ListView listview =  (ListView) findViewById(R.id.pendingEmail);
+		Collection<Event> email = EmailSingle.getEmail().getEvent();
+		final ArrayList<Event> emaillist = new ArrayList<Event>(email);
+		final ArrayAdapter<Event> emailAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1,emaillist);
+		listview.setAdapter(emailAdapter);
 		
 		ArchiveSingle.getArchive().addListener(new Listener(){
 
 			@Override
 			public void update() {
-				archivelist.clear();
+				emaillist.clear();
 				Collection<Event> arc = ArchiveSingle.getArchive().getEvent();
-				archivelist.addAll(arc);
-				archiveAdapter.notifyDataSetChanged();
+				emaillist.addAll(arc);
+				emailAdapter.notifyDataSetChanged();
 			}
 			
 			
 		});
 		
-		listview.setOnItemClickListener(new OnItemClickListener(){
-
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int position,
-					long id) {
-				final int finalPosition = position;
-				Event event = archivelist.get(finalPosition);
-				ArchiveSingle.getArchive().check(event);
-				
-			}
-			
-			
-		});
 		
 		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
-				AlertDialog.Builder ad = new AlertDialog.Builder(ArchiveActivity.this);
-				ad.setMessage("Delete "+ archivelist.get(position).toString()+"?");
+				AlertDialog.Builder ad = new AlertDialog.Builder(EmailActivity.this);
+				ad.setMessage("Delete "+ emaillist.get(position).toString()+"?");
 				ad.setCancelable(true);
 				final int finalPosition = position;
 				ad.setPositiveButton("Delete", new OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Event arcEve = archivelist.get(finalPosition);
-						EventSingle.getEventList().deleteEvent(arcEve);
+						Event emEve = emaillist.get(finalPosition);
+						EmailSingle.getEmail().deleteEvent(emEve);
 						
 					}
 					
 				});
-				//Crashing for some reason :(
-				ad.setNeutralButton("UnArchive", new OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Event arcEve = archivelist.get(finalPosition);
-						EventSingle.getEventList().addEvent(arcEve);
-						ArchiveSingle.getArchive().deleteEvent(arcEve);
-					
-						
-					}
-					
-				});
-				ad.setNegativeButton("AddToEmail", new OnClickListener(){
+				ad.setNegativeButton("Cancel", new OnClickListener(){
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Event todo = archivelist.get(finalPosition);
-						//emails.addTodo(todo);
-						//TodoSingle.getEmails().addTodo(todo);
+
 					}
 					});
 					
@@ -105,7 +78,7 @@ public class ArchiveActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.archive, menu);
+		getMenuInflater().inflate(R.menu.email, menu);
 		return true;
 	}
 	@Override

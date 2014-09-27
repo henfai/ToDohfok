@@ -45,14 +45,28 @@ public class EventList implements Serializable {
 		eventList.add(event);
 		notifyListen();
 	}
-	
-
-	public void cross(Event eventItem) {
-	}
 
 	public void deleteEvent(Event event){
 		eventList.remove(event);
 		notifyListen();
+	}
+	
+	public void check(Event event) {
+		if (event.toString().contains("\u2573")){
+			int index1 = eventList.indexOf(event);
+			eventList.remove(event);
+			Event event2 = new Event(event.getEventText().replace("\u2573  ", ""));
+			eventList.add(index1,event2);
+			notifyListen();
+		}
+		else{
+			int index1 = eventList.indexOf(event);
+			eventList.remove(event);
+			Event event2 = new Event ("\u2573  " + event.getEventText());
+			eventList.add(index1,event2);
+			notifyListen();
+		}
+		
 	}
 	
 	public void addListener(Listener l){

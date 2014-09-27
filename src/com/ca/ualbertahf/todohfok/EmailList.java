@@ -4,18 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ArchiveList implements Serializable {
+public class EmailList implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1685788510449625327L;
-	protected ArrayList<Event> arcList;
+	private static final long serialVersionUID = -1516066072919849529L;
+	protected ArrayList<Event> mailList;
 	protected transient ArrayList<Listener> listeners;
 
 	
-	public ArchiveList(){
-		arcList = new ArrayList<Event>();
+	public EmailList(){
+		mailList = new ArrayList<Event>();
 		listeners = new ArrayList<Listener>();
 		
 	}
@@ -35,12 +35,12 @@ public class ArchiveList implements Serializable {
 	}
 	
 	public Collection<Event> getEvent(){
-		return arcList;
+		return mailList;
 
 	}
 	
 	public void addEvent(Event event){
-		arcList.add(event);
+		mailList.add(event);
 		notifyListen();
 	}
 	
@@ -49,26 +49,8 @@ public class ArchiveList implements Serializable {
 	}
 
 	public void deleteEvent(Event event){
-		arcList.remove(event);
+		mailList.remove(event);
 		notifyListen();
-	}
-	
-	public void check(Event event) {
-		if (event.toString().contains("\u2573")){
-			int index1 = arcList.indexOf(event);
-			arcList.remove(event);
-			Event event2 = new Event(event.getEventText().replace("\u2573  ", ""));
-			arcList.add(index1,event2);
-			notifyListen();
-		}
-		else{
-			int index1 = arcList.indexOf(event);
-			arcList.remove(event);
-			Event event2 = new Event ("\u2573  " + event.getEventText());
-			arcList.add(index1,event2);
-			notifyListen();
-		}
-		
 	}
 	
 	public void addListener(Listener l){
@@ -81,7 +63,7 @@ public class ArchiveList implements Serializable {
 	
 
 	public void clear(){
-		arcList = new ArrayList<Event>();
+		mailList = new ArrayList<Event>();
 		notifyListen();
 	}
 
