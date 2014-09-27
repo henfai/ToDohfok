@@ -10,3 +10,5 @@ You should have received a copy of the GNU General Public License along with ToD
 This application is a simple todo list app that attempts to provide users with functionalities such as to add events, check, archive, email them and, provide a summary of all check and unchecked events and status of each list.
 
 The Student Picker video series created by Abram Hindle was heavily used to guide and help during the creation of this app and many of the solutions from these videos are implemented in this application. https://www.youtube.com/watch?v=5PPD0ncJU1g (Sept. 25 2014)
+
+4 main activity functions, 3 lists, there are pratically the same thing but just divided by type for easy access. 
