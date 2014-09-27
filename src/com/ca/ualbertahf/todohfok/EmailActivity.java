@@ -18,12 +18,14 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Toast;
+import com.ca.ualbertahf.ToDoListhfok.R;
 
 public class EmailActivity extends Activity {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_email);
+		setTitle("My pending email");
 		EmIO.inititalise(this.getApplicationContext());
 		ListView listview =  (ListView) findViewById(R.id.pendingEmail);
 		Collection<Event> email = EmailSingle.getEmail().getEvent();

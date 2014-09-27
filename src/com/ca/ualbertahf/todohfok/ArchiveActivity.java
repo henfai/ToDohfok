@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import com.ca.ualbertahf.ToDoListhfok.R;
 
 public class ArchiveActivity extends Activity {
 	
@@ -25,6 +26,7 @@ public class ArchiveActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_archive);
 		ArcIO.inititalise(this.getApplicationContext());
+		setTitle("My archived todo list");
 		ListView listview =  (ListView) findViewById(R.id.archiveList);
 		Collection<Event> events = ArchiveSingle.getArchive().getEvent();
 		final ArrayList<Event> archivelist = new ArrayList<Event>(events);

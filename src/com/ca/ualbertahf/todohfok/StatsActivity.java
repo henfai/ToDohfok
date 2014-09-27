@@ -9,6 +9,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import com.ca.ualbertahf.ToDoListhfok.R;
 
 public class StatsActivity extends Activity {
 	
@@ -22,6 +23,7 @@ public class StatsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stats);
+		setTitle("Statistics");
 		
 		String activeMix = String.valueOf(EventSingle.getEventList().eventActCount());
 		String [] activeSplit = activeMix.split(" ");

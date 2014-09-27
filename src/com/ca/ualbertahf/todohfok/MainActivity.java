@@ -48,6 +48,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.ca.ualbertahf.ToDoListhfok.R;
 
 
 
@@ -57,6 +58,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		setTitle("My Todo List");
 		EveIO.inititalise(this.getApplicationContext());
 		ArcIO.inititalise(this.getApplicationContext());
 		EmIO.inititalise(this.getApplicationContext());
