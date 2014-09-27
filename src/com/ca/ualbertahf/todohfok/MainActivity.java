@@ -20,7 +20,6 @@
 
 
 
-
 package com.ca.ualbertahf.todohfok;
 
 import android.app.Activity;
@@ -56,6 +55,7 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		///everything initialises on start
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTitle("My Todo List");
@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
 		final ArrayAdapter<Event> EventsAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1, Eventslist);
 		listview.setAdapter(EventsAdapter);
 		
-
+		///singleton
 		EventSingle.getEventList().addListener(new Listener(){
 
 			@Override
@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 			
 			
 		});
-		
+		///click listener
 		listview.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
@@ -147,7 +147,7 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	///menu items 
 	public void archive(MenuItem menu) {
 		Toast.makeText(this, "Acessing Archive", Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(MainActivity.this, ArchiveActivity.class);
@@ -159,7 +159,7 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(MainActivity.this, StatsActivity.class);
 		startActivity(intent);
 	}
-	
+	///dialog alerts for more options
 	public void Email(MenuItem menu) {
 		AlertDialog.Builder abc = new AlertDialog.Builder(MainActivity.this);
 		abc.setMessage("Choose an action");
@@ -225,7 +225,7 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(MainActivity.this, EmailActivity.class);
 		startActivity(intent);
 	}
-
+	///adds events from the text box to the list
 	public void addEvent(View v){
 		//Toast.makeText(this, "Add Event",Toast.LENGTH_SHORT).show();
 		EventSingle ts = new EventSingle();
