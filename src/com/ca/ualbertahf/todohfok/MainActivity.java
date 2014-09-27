@@ -52,7 +52,7 @@ import com.ca.ualbertahf.ToDoListhfok.R;
 
 
 public class MainActivity extends Activity {
-
+	/// !!!!!!!!!!!!!!!!!!!!! missed out a lot of documentation as I had to restart my project the day of due date :(
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		///everything initialises on start
